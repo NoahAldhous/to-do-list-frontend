@@ -19,7 +19,7 @@ export default function List(){
 
     return<>
         {myList.map( item  => {
-            return <ListItem props={item}/>
+            return <ListItem {...item}/>
         } )}
     </>
 }
