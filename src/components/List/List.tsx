@@ -1,61 +1,24 @@
 import ListItem from './ListItem';
+import { useState } from 'react';
 
 export default function List(){
 
-    const myList:{action:string, complete:boolean}[] = [
-        {
-            action:'read my book',
-            complete: true,        
-        },
-        {
-            action:'do yoga',
-            complete: false,        
-        },
-        {
-            action:'cook dinner',
-            complete: false,        
-        },
-        {
-            action:'codewars',
-            complete: true,        
-        },
-        {
-            action:'toilet paper',
-            complete: false,        
-        },
-        {
-            action:'session prep',
-            complete: false,        
-        },
-        {
-            action:'read my book',
-            complete: true,        
-        },
-        {
-            action:'do yoga',
-            complete: false,        
-        },
-        {
-            action:'cook dinner',
-            complete: false,        
-        },
-        {
-            action:'codewars',
-            complete: true,        
-        },
-        {
-            action:'toilet paper',
-            complete: false,        
-        },
-        {
-            action:'session prep',
-            complete: false,        
-        },
-    ];
+    const [list, setList] = useState<{}[]|null>(null);
+
+    async function fetchList(){
+        const response = await fetch('http://localhost:3001/');
+        const data:{}[] = await response.json();
+        setList(data)
+    };
+
+    fetchList();
 
     return<section className = ' overflow-y-scroll h-5/6 flex flex-col items-end'>
-        {myList.map( item  => {
-            return <ListItem {...item}/>
-        } )}
+        {list
+            ? list.map( item  => {
+                return <ListItem action={''} complete={false} {...item}/>
+            } )
+            : <p>Loading...</p>
+        }
     </section>
 }
