@@ -13,7 +13,7 @@ export default function List(){
 
     fetchList();
 
-    return<section className = ' overflow-y-scroll h-5/6 flex flex-col items-end'>
+    return<section className = ' overflow-y-scroll h-5/6 w-full pl-5 pr-5 min-w-fit flex flex-col items-center'>
         {list
             ? list.map( item  => {
                 return <ListItem action={''} complete={false} {...item}/>

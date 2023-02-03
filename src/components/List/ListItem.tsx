@@ -5,9 +5,10 @@ interface LiProps{
 
 const ListItem: React.FC<LiProps> = (item: LiProps) =>  {
     const {action, complete} = item
-    return <div className='text-2xl w-80 bg-slate-600 flex justify-end mb-4 rounded-xl'> 
-        <p className='mr-4'>{ action }</p>
-        <input  className='mr-4 accent-orange-500' type='checkbox' checked= {complete ? true : false}/>
+    return <div className='w-full bg-slate-600 flex justify-end mb-4 rounded-xl pl-4 pr-4 pb-1 pt-1'> 
+        <p className='text-l sm:text-2xl whitespace-nowrap'>{ action }</p>
+        <div className='w-2'></div>
+        <input  className='accent-orange-500' type='checkbox' checked= {complete ? true : false}/>
     </div>
 }
 
