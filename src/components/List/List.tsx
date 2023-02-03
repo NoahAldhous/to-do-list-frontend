@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 
 export default function List({ setIsError} : {setIsError:React.Dispatch<React.SetStateAction<boolean>>}){
 
-
-    const [list, setList] = useState<{}[]|null>(null);
+    const [list, setList] = useState<{itemNumber: number, action: string, complete:boolean}[]|null>(null);
 
     async function fetchList(){
 
@@ -13,8 +12,8 @@ export default function List({ setIsError} : {setIsError:React.Dispatch<React.Se
         fetch(url)
         .then( async (response)  => {
             if (response.ok) {
-                const data:{}[] = await response.json();
-                setList(data)
+                const data:{user: string, list:{itemNumber: number, action: string, complete:boolean}[]}[] = await response.json();
+                setList(data[0].list)
                 return true;
             }
             return Promise.reject(response);
@@ -33,7 +32,7 @@ export default function List({ setIsError} : {setIsError:React.Dispatch<React.Se
     return<section className = ' overflow-y-scroll h-5/6 w-full pl-5 pr-5 min-w-fit flex flex-col justify-center items-center'>
         {list
             ? list.map( item  => {
-                return <ListItem action={''} complete={false} {...item}/>
+                return <ListItem key = {item.itemNumber} item = {item}/>
             } )
             : <p className='text-2xl'>Loading...</p>
         }
