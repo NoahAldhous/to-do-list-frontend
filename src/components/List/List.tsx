@@ -1,5 +1,5 @@
 import ListItem from './ListItem';
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 
 export default function List({ setIsError} : {setIsError:React.Dispatch<React.SetStateAction<boolean>>}){
 
@@ -13,9 +13,9 @@ export default function List({ setIsError} : {setIsError:React.Dispatch<React.Se
         .then( async (response)  => {
             if (response.ok) {
                 console.log(response)
-                const data:{_id: string, action: string, complete:boolean}[] = await response.json();
-                console.log(data)
-                setList(data)
+                const data:{request:string, success: boolean, message:{_id: string, action: string, complete:boolean}[]} = await response.json();
+                console.log(data.message)
+                setList(data.message)
                 return true;
             }
             return Promise.reject(response);
@@ -29,7 +29,11 @@ export default function List({ setIsError} : {setIsError:React.Dispatch<React.Se
         }))
     };
 
-    fetchList();
+    useEffect(() => {
+        fetchList();
+        console.log('fetchlist called')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     return<section className = ' overflow-y-scroll h-5/6 w-full pl-5 pr-5 min-w-fit flex flex-col justify-center items-center'>
         {list
