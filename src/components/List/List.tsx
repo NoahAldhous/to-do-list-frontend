@@ -3,7 +3,7 @@ import React, { useState, useEffect} from 'react';
 
 export default function List({ setIsError} : {setIsError:React.Dispatch<React.SetStateAction<boolean>>}){
 
-    const [list, setList] = useState<{_id: string, action: string, complete:boolean}[]|null>(null);
+    const [list, setList] = useState<{_id: string, action: string, completed:boolean}[]|[]>([]);
 
     async function fetchList(){
 
@@ -13,7 +13,7 @@ export default function List({ setIsError} : {setIsError:React.Dispatch<React.Se
         .then( async (response)  => {
             if (response.ok) {
                 console.log(response)
-                const data:{request:string, success: boolean, message:{_id: string, action: string, complete:boolean}[]} = await response.json();
+                const data:{request:string, success: boolean, message:{_id: string, action: string, completed:boolean}[]} = await response.json();
                 console.log(data.message)
                 setList(data.message)
                 return true;
@@ -36,9 +36,9 @@ export default function List({ setIsError} : {setIsError:React.Dispatch<React.Se
     },[])
 
     return<section className = ' overflow-y-scroll h-5/6 w-full pl-5 pr-5 min-w-fit flex flex-col justify-center items-center'>
-        {list
+        {list.length > 0
             ? list.map( item  => {
-                return <ListItem key = {item._id} item = {item}/>
+                return <ListItem key = {item._id} item = {item} setList = {setList} list={list}/>
             } )
             : <p className='text-2xl'>Loading...</p>
         }
