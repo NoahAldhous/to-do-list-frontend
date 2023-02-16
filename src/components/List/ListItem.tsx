@@ -1,16 +1,14 @@
 import React, { ChangeEventHandler, useState} from "react";
 
 type Props = {
-    item:{ _id: string, action: string; completed: boolean; },
-    setList:React.Dispatch<React.SetStateAction<{_id: string, action: string, completed:boolean}[]|[]>>,
-    list:{_id: string, action: string, completed:boolean}[]|[],
+    item: { _id: string, action: string; completed: boolean; },
+    setList: React.Dispatch<React.SetStateAction<{_id: string, action: string, completed:boolean}[]|[]>>,
 }
 
-const ListItem = (
-    { item, setList, list } : Props
-) =>  {
+const ListItem = ( { item, setList } : Props ) =>  {
     
     const {action, completed, _id} = item
+
     const [checked, setChecked] = useState<boolean>(completed)
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = () => {

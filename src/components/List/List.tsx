@@ -38,7 +38,7 @@ export default function List({ setIsError} : {setIsError:React.Dispatch<React.Se
     return<section className = ' overflow-y-scroll h-5/6 w-full pl-5 pr-5 min-w-fit flex flex-col justify-center items-center'>
         {list.length > 0
             ? list.map( item  => {
-                return <ListItem key = {item._id} item = {item} setList = {setList} list={list}/>
+                return <ListItem key = {item._id} item = {item} setList = {setList}/>
             } )
             : <p className='text-2xl'>Loading...</p>
         }
