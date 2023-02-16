@@ -22,9 +22,7 @@ const ListItem = (
     }
 
     const handleDelete = ( _id:string) => {
-        if(list){
         setList(list => list.filter(item => item._id !== _id))
-        }
     }
 
     return <div key = {_id} className='w-full bg-slate-600 flex justify-end mb-4 rounded-xl pl-4 pr-4 pb-1 pt-1'> 
