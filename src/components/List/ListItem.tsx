@@ -21,6 +21,7 @@ const ListItem = ( { item, setList } : Props ) =>  {
 
     const handleDelete = ( _id:string) => {
         setList(list => list.filter(item => item._id !== _id))
+        //TODO: fetch request - DELETE with id as param.
     }
 
     return <div key = {_id} className='w-full bg-slate-600 flex justify-end mb-4 rounded-xl pl-4 pr-4 pb-1 pt-1'> 
