@@ -18,7 +18,7 @@ function App() {
           </section>
         : <section className="bg-slate-400 w-1/4 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-3xl shadow-2xl">
             <h1 className="flex justify-center text-4xl text-slate-800 w-full font-bold bg-slate-300"> To-Do-List</h1>
-            <List setIsError = {setIsError}/>
+            <List isModal={isModal} setIsError = {setIsError}/>
             {isModal
             ? <NewItemModal setIsModal = {setIsModal}/>
             : null
