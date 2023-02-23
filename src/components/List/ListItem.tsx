@@ -22,11 +22,10 @@ const ListItem = ( { item, setList } : Props ) =>  {
     const deleteFromDatabase = async (itemId:string) => {
         try{
             const url = `http://localhost:3001/${itemId}`;
-            console.log(url);
             const data = await fetch(url, {
                 method: 'DELETE'    
             });
-            const response = data.json();
+            const response = await data.json();
             console.log(response);
         }   
         catch(err){
@@ -36,7 +35,6 @@ const ListItem = ( { item, setList } : Props ) =>  {
 
     const handleDelete = ( _id:string) => {
         setList(list => list.filter(item => item._id !== _id))
-        //TODO: fetch request - DELETE with id as param.
         deleteFromDatabase(_id)
     }
 
