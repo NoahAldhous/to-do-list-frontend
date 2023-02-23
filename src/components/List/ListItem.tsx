@@ -19,9 +19,25 @@ const ListItem = ( { item, setList } : Props ) =>  {
         }
     }
 
+    const deleteFromDatabase = async (itemId:string) => {
+        try{
+            const url = `http://localhost:3001/${itemId}`;
+            console.log(url);
+            const data = await fetch(url, {
+                method: 'DELETE'    
+            });
+            const response = data.json();
+            console.log(response);
+        }   
+        catch(err){
+            console.log(err)
+        }
+    }
+
     const handleDelete = ( _id:string) => {
         setList(list => list.filter(item => item._id !== _id))
         //TODO: fetch request - DELETE with id as param.
+        deleteFromDatabase(_id)
     }
 
     return <div key = {_id} className='w-full bg-slate-600 flex justify-end mb-4 rounded-xl pl-4 pr-4 pb-1 pt-1'> 
