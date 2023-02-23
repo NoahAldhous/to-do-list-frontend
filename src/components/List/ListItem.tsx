@@ -34,6 +34,7 @@ const ListItem = ( { item, setList } : Props ) =>  {
     }
 
     const handleDelete = ( _id:string) => {
+        //state update to avoid having to fetch after every deletion
         setList(list => list.filter(item => item._id !== _id))
         deleteFromDatabase(_id)
     }
