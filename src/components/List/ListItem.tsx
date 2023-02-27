@@ -47,7 +47,7 @@ const ListItem = ( { item, setList } : Props ) =>  {
         <p className='text-l sm:text-2xl whitespace-nowrap'>{ action }</p>
         <div className='w-2'></div>
         <input  className='accent-orange-500' type='checkbox' onChange={handleChange} checked= {checked ? true : false}/>
-        <button className='bg-blue-500 rounded-xl' onClick={() =>{handleEdit(_id)}}>edit</button>
+        <button className='bg-blue-400 rounded-xl' onClick={() =>{handleEdit(_id)}}>edit</button>
         <button className='bg-red-500 rounded-xl' onClick={() =>{handleDelete(_id)}}>delete</button>
     </div>
 }
