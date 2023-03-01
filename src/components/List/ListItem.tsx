@@ -3,9 +3,10 @@ import React, { ChangeEventHandler, useState} from "react";
 type Props = {
     item: { _id: string, action: string; completed: boolean; },
     setList: React.Dispatch<React.SetStateAction<{_id: string, action: string, completed:boolean}[]|[]>>,
+    setIsEditModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ListItem = ( { item, setList } : Props ) =>  {
+const ListItem = ( { item, setList, setIsEditModal } : Props ) =>  {
     
     const {action, completed, _id} = item
 
@@ -34,7 +35,7 @@ const ListItem = ( { item, setList } : Props ) =>  {
     }
 
     const handleEdit = (_id:string) => {
-        //TODO: write function for editing 
+        setIsEditModal(true);
     }
 
     const handleDelete = ( _id:string) => {

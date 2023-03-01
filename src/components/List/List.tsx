@@ -4,9 +4,10 @@ import React, { useState, useEffect} from 'react';
 type Props = {
     isModal:boolean,
     setIsError:React.Dispatch<React.SetStateAction<boolean>>,
+    setIsEditModal:React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function List({ isModal, setIsError }: Props){
+export default function List({ isModal, setIsError, setIsEditModal }: Props){
 
     const [list, setList] = useState<{_id: string, action: string, completed:boolean}[]|[]>([]);
 
@@ -44,7 +45,7 @@ export default function List({ isModal, setIsError }: Props){
         {list.length > 0
             ? list.map( item  => 
                 {
-                return <ListItem key = {item._id} item = {item} setList = {setList}/>
+                return <ListItem key = {item._id} item = {item} setList = {setList} setIsEditModal = {setIsEditModal}/>
                 })
             : <p className='text-2xl'>Loading...</p>
         }
