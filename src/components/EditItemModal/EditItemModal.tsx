@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-export default function EditItemModal({setIsEditModal} : {setIsEditModal:React.Dispatch<React.SetStateAction<boolean>>}){
+type Props = {
+    setIsEditModal: React.Dispatch<React.SetStateAction<boolean>>,
+    editModalText: string
+}
+
+export default function EditItemModal({setIsEditModal, editModalText} : Props){
 
     const [editItemText, setEditItemText] = useState<string>('')
 
@@ -50,7 +55,7 @@ export default function EditItemModal({setIsEditModal} : {setIsEditModal:React.D
                 ? <p>item added!</p>
                 : <p> </p>
                 }
-                <input id='input-box' type='text' value="default value" onFocus={()=>{setNewItemAdded(false)}} onChange = {updateItemText}></input>
+                <input id='input-box' type='text' value={editModalText} onFocus={()=>{setNewItemAdded(false)}} onChange = {updateItemText}></input>
                 <button onClick = {handleClick}>save</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>

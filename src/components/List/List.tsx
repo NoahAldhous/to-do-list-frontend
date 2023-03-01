@@ -4,10 +4,11 @@ import React, { useState, useEffect} from 'react';
 type Props = {
     isModal:boolean,
     setIsError:React.Dispatch<React.SetStateAction<boolean>>,
-    setIsEditModal:React.Dispatch<React.SetStateAction<boolean>>
+    setIsEditModal:React.Dispatch<React.SetStateAction<boolean>>,
+    setEditModalText: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function List({ isModal, setIsError, setIsEditModal }: Props){
+export default function List({ isModal, setIsError, setIsEditModal, setEditModalText }: Props){
 
     const [list, setList] = useState<{_id: string, action: string, completed:boolean}[]|[]>([]);
 
@@ -45,7 +46,7 @@ export default function List({ isModal, setIsError, setIsEditModal }: Props){
         {list.length > 0
             ? list.map( item  => 
                 {
-                return <ListItem key = {item._id} item = {item} setList = {setList} setIsEditModal = {setIsEditModal}/>
+                return <ListItem key = {item._id} item = {item} setList = {setList} setIsEditModal = {setIsEditModal} setEditModalText= {setEditModalText}/>
                 })
             : <p className='text-2xl'>Loading...</p>
         }
