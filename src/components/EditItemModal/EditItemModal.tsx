@@ -23,7 +23,7 @@ export default function EditItemModal({setIsEditModal, editModalText, itemComple
         setIsEditModal(false)
     }
    
-    const updateItemInDataBase = async() => {
+    const updateItemInDatabase = async() => {
         try{
             const url = `http://localhost:3001/${itemId}`;
             const data = await fetch(url, {
@@ -47,7 +47,7 @@ export default function EditItemModal({setIsEditModal, editModalText, itemComple
     }
 
     const handleClick = () => {
-        updateItemInDataBase();
+        updateItemInDatabase();
     }
 
     return <>

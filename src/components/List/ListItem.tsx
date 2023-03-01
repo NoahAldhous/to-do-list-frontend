@@ -15,13 +15,35 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCom
 
     const [checked, setChecked] = useState<boolean>(completed)
 
+    const updateItemInDatabase = async(checkboxStatus:boolean) => {
+        try{
+            const url = `http://localhost:3001/${_id}`;
+            const data = await fetch(url, {
+                method: 'PUT',         
+                body: JSON.stringify({
+                    action: action, 
+                    completed: checkboxStatus}),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                    }
+            })
+            console.log(data);
+            const response = await data.json()
+            console.log(response.message)
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    //TODO: If the checkbox is clicked too quickly, requests cant be resolved fast enough.
     const handleChange: ChangeEventHandler<HTMLInputElement> = () => {
         if(checked){
             setChecked(false);
+            updateItemInDatabase(false);
         }else{
             setChecked(true);
-        }
-        //TODO: write PUT request here to update if item is completed or not.
+            updateItemInDatabase(true)
+        } 
     }
 
     const deleteFromDatabase = async (itemId:string) => {
