@@ -7,11 +7,12 @@ type Props = {
 
 export default function EditItemModal({setIsEditModal, editModalText} : Props){
 
-    const [editItemText, setEditItemText] = useState<string>('')
+    const [editItemText, setEditItemText] = useState<string>(editModalText)
 
     const [newItemAdded, setNewItemAdded] = useState<boolean>(false)
     
     const updateItemText = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('change detected')
         setEditItemText(e.target.value); 
         console.log(editItemText)
     }
@@ -55,7 +56,7 @@ export default function EditItemModal({setIsEditModal, editModalText} : Props){
                 ? <p>item added!</p>
                 : <p> </p>
                 }
-                <input id='input-box' type='text' value={editModalText} onFocus={()=>{setNewItemAdded(false)}} onChange = {updateItemText}></input>
+                <input id='input-box' type='text' value={editItemText} onFocus={()=>{setNewItemAdded(false)}} onChange = {updateItemText}></input>
                 <button onClick = {handleClick}>save</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>
