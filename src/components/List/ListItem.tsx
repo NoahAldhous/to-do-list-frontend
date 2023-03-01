@@ -4,10 +4,12 @@ type Props = {
     item: { _id: string, action: string; completed: boolean; },
     setList: React.Dispatch<React.SetStateAction<{_id: string, action: string, completed:boolean}[]|[]>>,
     setIsEditModal: React.Dispatch<React.SetStateAction<boolean>>,
-    setEditModalText: React.Dispatch<React.SetStateAction<string>>
+    setEditModalText: React.Dispatch<React.SetStateAction<string>>,
+    setItemCompleted: React.Dispatch<React.SetStateAction<boolean>>,
+    setItemId: React.Dispatch<React.SetStateAction<string>>,
 }
 
-const ListItem = ( { item, setList, setIsEditModal, setEditModalText } : Props ) =>  {
+const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCompleted, setItemId  } : Props ) =>  {
     
     const {action, completed, _id} = item
 
@@ -19,6 +21,7 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText } : Props )
         }else{
             setChecked(true);
         }
+        //TODO: write PUT request here to update if item is completed or not.
     }
 
     const deleteFromDatabase = async (itemId:string) => {
@@ -36,7 +39,9 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText } : Props )
     }
 
     const handleEdit = (_id:string) => {
-        setEditModalText(action)
+        setEditModalText(action);
+        setItemId(_id);
+        setItemCompleted(completed)
         setIsEditModal(true);
     }
 

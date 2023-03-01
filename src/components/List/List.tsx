@@ -4,11 +4,14 @@ import React, { useState, useEffect} from 'react';
 type Props = {
     isModal:boolean,
     setIsError:React.Dispatch<React.SetStateAction<boolean>>,
+    isEditModal:boolean
     setIsEditModal:React.Dispatch<React.SetStateAction<boolean>>,
-    setEditModalText: React.Dispatch<React.SetStateAction<string>>
+    setEditModalText: React.Dispatch<React.SetStateAction<string>>,
+    setItemCompleted: React.Dispatch<React.SetStateAction<boolean>>,
+    setItemId: React.Dispatch<React.SetStateAction<string>>,
 }
 
-export default function List({ isModal, setIsError, setIsEditModal, setEditModalText }: Props){
+export default function List({ isModal, setIsError, isEditModal, setIsEditModal, setEditModalText, setItemCompleted, setItemId }: Props){
 
     const [list, setList] = useState<{_id: string, action: string, completed:boolean}[]|[]>([]);
 
@@ -40,13 +43,13 @@ export default function List({ isModal, setIsError, setIsEditModal, setEditModal
         fetchList();
         console.log('fetchlist called')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[isModal])
+    },[isModal, isEditModal])
 
     return<section className = ' overflow-y-scroll h-5/6 w-full pl-5 pr-5 min-w-fit flex flex-col justify-center items-center'>
         {list.length > 0
             ? list.map( item  => 
                 {
-                return <ListItem key = {item._id} item = {item} setList = {setList} setIsEditModal = {setIsEditModal} setEditModalText= {setEditModalText}/>
+                return <ListItem key = {item._id} item = {item} setList = {setList} setIsEditModal = {setIsEditModal} setEditModalText= {setEditModalText} setItemCompleted = {setItemCompleted} setItemId = {setItemId}/>
                 })
             : <p className='text-2xl'>Loading...</p>
         }

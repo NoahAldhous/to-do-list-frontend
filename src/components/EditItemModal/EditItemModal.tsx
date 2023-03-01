@@ -2,14 +2,16 @@ import { useState } from 'react';
 
 type Props = {
     setIsEditModal: React.Dispatch<React.SetStateAction<boolean>>,
-    editModalText: string
+    editModalText: string,
+    itemCompleted: boolean,
+    itemId: string,
 }
 
-export default function EditItemModal({setIsEditModal, editModalText} : Props){
+export default function EditItemModal({setIsEditModal, editModalText, itemCompleted, itemId} : Props){
 
     const [editItemText, setEditItemText] = useState<string>(editModalText)
 
-    const [newItemAdded, setNewItemAdded] = useState<boolean>(false)
+    const [newItemUpdated, setNewItemUpdated] = useState<boolean>(false)
     
     const updateItemText = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log('change detected')
@@ -21,14 +23,14 @@ export default function EditItemModal({setIsEditModal, editModalText} : Props){
         setIsEditModal(false)
     }
    
-    const addItemToDataBase = async() => {
+    const updateItemInDataBase = async() => {
         try{
-            const url = 'http://localhost:3001/';
+            const url = `http://localhost:3001/${itemId}`;
             const data = await fetch(url, {
-                method: 'POST',         
+                method: 'PUT',         
                 body: JSON.stringify({
-                    action: updateItemText, 
-                    completed: false}),
+                    action: editItemText, 
+                    completed: itemCompleted}),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                     }
@@ -36,8 +38,7 @@ export default function EditItemModal({setIsEditModal, editModalText} : Props){
             console.log(data);
             const response = await data.json()
             if(response){
-                setNewItemAdded(true);
-                (document.getElementById('input-box') as HTMLInputElement).value = '';
+                setNewItemUpdated(true);
             }
             console.log(response.message)
         }catch(err){
@@ -46,17 +47,17 @@ export default function EditItemModal({setIsEditModal, editModalText} : Props){
     }
 
     const handleClick = () => {
-        addItemToDataBase();
+        updateItemInDataBase();
     }
 
     return <>
         <section className= 'left-0 top-0 fixed w-full h-full flex flex-col justify-center items-center'>
             <section className= 'z-50 relative flex flex-col justify-center items-center w-1/2 h-1/4 bg-slate-400'>
-                {newItemAdded
-                ? <p>item added!</p>
+                {newItemUpdated
+                ? <p>item updated!</p>
                 : <p> </p>
                 }
-                <input id='input-box' type='text' value={editItemText} onFocus={()=>{setNewItemAdded(false)}} onChange = {updateItemText}></input>
+                <input id='input-box' type='text' value={editItemText} onFocus={()=>{setNewItemUpdated(false)}} onChange = {updateItemText}></input>
                 <button onClick = {handleClick}>save</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>
