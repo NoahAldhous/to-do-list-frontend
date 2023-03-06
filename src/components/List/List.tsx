@@ -17,8 +17,8 @@ export default function List({ isModal, setIsError, isEditModal, setIsEditModal,
 
     async function fetchList(){
 
-        const url = 'http://localhost:3001/';
-        console.log('sending request to localhost...')
+        const url = 'https://naldhous-to-do-list.onrender.com/';
+        console.log(`sending request to ${url}`)
         await fetch(url)
         .then( async (response)  => {
             if (response.ok) {

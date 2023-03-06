@@ -17,7 +17,7 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCom
 
     const updateItemInDatabase = async(checkboxStatus:boolean) => {
         try{
-            const url = `http://localhost:3001/${_id}`;
+            const url = `https://naldhous-to-do-list.onrender.com/${_id}`;
             const data = await fetch(url, {
                 method: 'PUT',         
                 body: JSON.stringify({
@@ -48,7 +48,7 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCom
 
     const deleteFromDatabase = async (itemId:string) => {
         try{
-            const url = `http://localhost:3001/${itemId}`;
+            const url = `https://naldhous-to-do-list.onrender.com/${itemId}`;
             const data = await fetch(url, {
                 method: 'DELETE'    
             });

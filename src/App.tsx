@@ -19,7 +19,7 @@ function App() {
       {
         isError 
         ? <section>
-            <p>OOPS! We can't connect to the server right now.</p>
+            <p>OOPS! We can't connect to the server right now. Please try again in a few minutes.</p>
           </section>
         : <section className="bg-slate-400 w-1/4 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-3xl shadow-2xl">
             <h1 className="flex justify-center text-4xl text-slate-800 w-full font-bold bg-slate-300"> To-Do-List</h1>

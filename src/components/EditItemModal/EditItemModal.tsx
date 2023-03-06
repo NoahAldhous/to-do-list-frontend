@@ -25,7 +25,7 @@ export default function EditItemModal({setIsEditModal, editModalText, itemComple
    
     const updateItemInDatabase = async() => {
         try{
-            const url = `http://localhost:3001/${itemId}`;
+            const url = `https://naldhous-to-do-list.onrender.com/${itemId}`;
             const data = await fetch(url, {
                 method: 'PUT',         
                 body: JSON.stringify({

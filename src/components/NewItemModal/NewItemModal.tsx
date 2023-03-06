@@ -17,7 +17,7 @@ export default function NewItemModal({setIsModal} : {setIsModal:React.Dispatch<R
    
     const addItemToDataBase = async() => {
         try{
-            const url = 'http://localhost:3001/';
+            const url = 'https://naldhous-to-do-list.onrender.com/';
             const data = await fetch(url, {
                 method: 'POST',         
                 body: JSON.stringify({
