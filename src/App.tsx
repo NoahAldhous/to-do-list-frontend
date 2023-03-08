@@ -21,7 +21,7 @@ function App() {
         ? <section>
             <p>OOPS! We can't connect to the server right now. Please try again in a few minutes.</p>
           </section>
-        : <section className="bg-slate-400 w-1/4 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-3xl shadow-2xl">
+        : <section className="bg-slate-600 w-1/3 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-3xl shadow-2xl">
             <h1 className="flex justify-center text-4xl text-slate-800 w-full font-bold bg-slate-300"> To-Do-List</h1>
             <List isModal={isModal} setIsError = {setIsError} isEditModal={isEditModal} setIsEditModal={setIsEditModal} setEditModalText ={setEditModalText} setItemCompleted = {setItemCompleted} setItemId = {setItemId}/>
             {isModal
@@ -32,7 +32,7 @@ function App() {
             ? <EditItemModal setIsEditModal={setIsEditModal} editModalText ={editModalText} itemCompleted={itemCompleted} itemId={itemId}/>
             : null
             }
-          <button onClick={ () => setIsModal(true) }>add an item</button>
+          <button className='bg-green-500  rounded-xl w-1/2 ml-2 mr-1' onClick={ () => setIsModal(true) }>add an item</button>
           </section>
       } 
     </div>

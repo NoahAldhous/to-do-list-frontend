@@ -73,13 +73,18 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCom
         deleteFromDatabase(_id)
     }
 
-    return <div key = {_id} className='w-full bg-slate-600 flex justify-end mb-4 rounded-xl pl-4 pr-4 pb-1 pt-1'> 
-        <p className='text-l sm:text-2xl whitespace-nowrap'>{ action }</p>
-        <div className='w-2'></div>
-        <input  className='accent-orange-500' type='checkbox' onChange={handleChange} checked= {checked ? true : false}/>
-        <button className='bg-blue-400 rounded-xl' onClick={() =>{handleEdit(_id)}}>edit</button>
-        <button className='bg-red-500 rounded-xl' onClick={() =>{handleDelete(_id)}}>delete</button>
-    </div>
+    return <section className = 'w-full flex justify-around mb-4'>
+        <section key = {_id} className='w-2/3 bg-slate-800 flex justify-end rounded-xl pl-4 pr-4 pb-1 pt-1'> 
+            <p className='text-m sm:text-xl whitespace-nowrap text-slate-200'>{ action }</p>
+            <div className='w-2'></div>
+            <input  className='accent-orange-500' type='checkbox' onChange={handleChange} checked= {checked ? true : false}/>
+        </section>
+        <section className='w-1/3 flex items-center justify-around'>
+            <button className='bg-blue-500 rounded-xl w-1/2 h-5/6 ml-2 mr-1' onClick={() =>{handleEdit(_id)}}>edit</button>
+            <button className='bg-red-500 rounded-xl w-1/2 h-5/6 ml-1' onClick={() =>{handleDelete(_id)}}>delete</button>
+        </section>
+        
+    </section> 
 }
 
 export default ListItem
