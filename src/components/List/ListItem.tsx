@@ -74,7 +74,7 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCom
     }
 
     return <section className = 'w-full flex justify-around mb-4'>
-        <section key = {_id} className='w-2/3 bg-slate-800 flex justify-end rounded-xl pl-4 pr-4 pb-1 pt-1'> 
+        <section key = {_id} onClick={() => handleEdit(_id)}className='cursor-pointer w-2/3 bg-slate-800 flex justify-end rounded-xl pl-4 pr-4 pb-1 pt-1'> 
             <p className='text-m sm:text-xl whitespace-nowrap text-slate-200'>{ action }</p>
             <div className='w-2'></div>
             <input  className='accent-orange-500' type='checkbox' onChange={handleChange} checked= {checked ? true : false}/>

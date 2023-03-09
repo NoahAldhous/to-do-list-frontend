@@ -52,13 +52,14 @@ export default function EditItemModal({setIsEditModal, editModalText, itemComple
 
     return <>
         <section className= 'left-0 top-0 fixed w-full h-full flex flex-col justify-center items-center'>
-            <section className= 'z-50 relative flex flex-col justify-center items-center w-1/2 h-1/4 bg-slate-400'>
+            <section className= 'z-50 relative flex flex-col justify-around items-center w-1/3 h-1/3 bg-slate-400'>
+                <h3 className='text-2xl mt-4' >Edit Item</h3>
                 {newItemUpdated
-                ? <p>item updated!</p>
-                : <p> </p>
+                ? <p className='h-1/6'>item updated!</p>
+                : <p className='h-1/6'> </p>
                 }
-                <input id='input-box' type='text' value={editItemText} onFocus={()=>{setNewItemUpdated(false)}} onChange = {updateItemText}></input>
-                <button onClick = {handleClick}>save</button>   
+                <input className='w-1/2 rounded-xl pl-2' id='input-box' type='text' value={editItemText} onFocus={()=>{setNewItemUpdated(false)}} onChange = {updateItemText}></input>
+                <button className='bg-blue-500 rounded-xl w-1/6 mt-2 mb-4' onClick = {handleClick}>save</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>
         <div onClick={handleClose} className= 'z-40 fixed left-0 top-0 bottom-0 right-0 w-full h-full bg-slate-900 opacity-50'></div>
