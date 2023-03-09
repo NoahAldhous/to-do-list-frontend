@@ -13,6 +13,7 @@ function App() {
   const [editModalText, setEditModalText] = useState<string>('')
   const [itemCompleted, setItemCompleted] = useState<boolean>(false)
   const [itemId, setItemId] = useState<string>('')
+  const [list, setList] = useState<{_id: string, action: string, completed:boolean}[]|[]>([]);
 
   return (
     <div className="bg-slate-100 w-screen h-screen flex items-center justify-center">
@@ -23,13 +24,30 @@ function App() {
           </section>
         : <section className="bg-slate-600 w-1/3 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-3xl shadow-2xl">
             <h1 className="flex justify-center text-4xl text-slate-800 w-full font-bold bg-slate-300"> To-Do-List</h1>
-            <List isModal={isModal} setIsError = {setIsError} isEditModal={isEditModal} setIsEditModal={setIsEditModal} setEditModalText ={setEditModalText} setItemCompleted = {setItemCompleted} setItemId = {setItemId}/>
+            <List 
+              isModal={isModal} 
+              setIsError = {setIsError} 
+              isEditModal={isEditModal} 
+              setIsEditModal={setIsEditModal} 
+              setEditModalText ={setEditModalText} 
+              setItemCompleted = {setItemCompleted} 
+              setItemId = {setItemId}
+              list = {list}
+              setList = {setList}
+            />
             {isModal
             ? <NewItemModal setIsModal = {setIsModal}/>
             : null
             }
             {isEditModal
-            ? <EditItemModal setIsEditModal={setIsEditModal} editModalText ={editModalText} itemCompleted={itemCompleted} itemId={itemId}/>
+            ? <EditItemModal 
+                setIsEditModal={setIsEditModal} 
+                editModalText ={editModalText} 
+                itemCompleted={itemCompleted} 
+                itemId={itemId}
+                list={list}
+                setList={setList}
+                />
             : null
             }
           <button className='bg-green-500  rounded-xl w-1/2 ml-2 mr-1' onClick={ () => setIsModal(true) }>add an item</button>

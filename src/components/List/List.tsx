@@ -1,19 +1,21 @@
 import ListItem from './ListItem';
-import React, { useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 
 type Props = {
-    isModal:boolean,
-    setIsError:React.Dispatch<React.SetStateAction<boolean>>,
-    isEditModal:boolean
-    setIsEditModal:React.Dispatch<React.SetStateAction<boolean>>,
+    isModal: boolean,
+    setIsError: React.Dispatch<React.SetStateAction<boolean>>,
+    isEditModal: boolean
+    setIsEditModal: React.Dispatch<React.SetStateAction<boolean>>,
     setEditModalText: React.Dispatch<React.SetStateAction<string>>,
     setItemCompleted: React.Dispatch<React.SetStateAction<boolean>>,
     setItemId: React.Dispatch<React.SetStateAction<string>>,
+    list: { _id: string, action: string, completed: boolean }[]|[],
+    setList: React.Dispatch<React.SetStateAction<{ _id: string, action: string, completed: boolean }[]|[]>>
 }
 
-export default function List({ isModal, setIsError, isEditModal, setIsEditModal, setEditModalText, setItemCompleted, setItemId }: Props){
+export default function List({ isModal, setIsError, isEditModal, setIsEditModal, setEditModalText, setItemCompleted, setItemId, list, setList }: Props){
 
-    const [list, setList] = useState<{_id: string, action: string, completed:boolean}[]|[]>([]);
+    // const [list, setList] = useState<{_id: string, action: string, completed:boolean}[]|[]>([]);
 
     async function fetchList(){
 
