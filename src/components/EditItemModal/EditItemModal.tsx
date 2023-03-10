@@ -51,7 +51,6 @@ export default function EditItemModal({setIsEditModal, editModalText, itemComple
     const handleEdit = () => {
         updateItemInDatabase();
         const newList = list.map(item=> item._id === itemId ? {_id:item._id, action:editItemText, completed:item.completed} : item);
-        console.log(newList);
         setList(newList)
     }
 
@@ -63,7 +62,7 @@ export default function EditItemModal({setIsEditModal, editModalText, itemComple
                 ? <p className='h-1/6'>item updated!</p>
                 : <p className='h-1/6'> </p>
                 }
-                <input className='w-1/2 rounded-xl pl-2' id='input-box' type='text' value={editItemText} onFocus={()=>{setNewItemUpdated(false)}} onChange = {updateItemText}></input>
+                <input className='w-1/2 rounded-xl pl-2' id='input-box' type='text' maxLength={20} value={editItemText} onFocus={()=>{setNewItemUpdated(false)}} onChange = {updateItemText}></input>
                 <button className='bg-blue-500 rounded-xl w-1/6 mt-2 mb-4' onClick = {handleEdit}>save</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>
