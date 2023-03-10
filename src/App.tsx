@@ -4,10 +4,13 @@ import './App.css';
 import EditItemModal from './components/EditItemModal/EditItemModal';
 import List from './components/List/List'
 import NewItemModal from './components/NewItemModal/NewItemModal';
+import Modal from './components/Modal/Modal'
 
 function App() {
 
   const [isError, setIsError] = useState<boolean>(false)
+  //TODO: refactor so all modals are rendered depending on this state-
+  const [modal, setModal] = useState<string>('none')
   const [isModal, setIsModal] = useState<boolean>(false)
   const [isEditModal, setIsEditModal] = useState<boolean>(false)
   const [editModalText, setEditModalText] = useState<string>('')
@@ -73,6 +76,7 @@ function App() {
                   setItemId = {setItemId}
                   list = {list}
                   setList = {setList}
+                  setModal = {setModal}
                 />
               : <section className='left-0 top-0 fixed w-screen h-screen flex flex-col justify-center items-center'>
                 <section className= 'z-50 relative flex flex-col justify-around items-center w-full sm:w-1/3 h-1/3 bg-slate-400'>
@@ -96,6 +100,7 @@ function App() {
                 />
             : null
             }
+            <Modal modal={modal} setModal={setModal}/>
             {list.length > 0 
               ? <button className='bg-green-500  rounded-xl w-1/2 ml-2 mr-1 mb-2' onClick={ () => setIsModal(true) }>add an item</button>
               : null

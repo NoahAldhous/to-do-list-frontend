@@ -7,9 +7,10 @@ type Props = {
     setEditModalText: React.Dispatch<React.SetStateAction<string>>,
     setItemCompleted: React.Dispatch<React.SetStateAction<boolean>>,
     setItemId: React.Dispatch<React.SetStateAction<string>>,
+    setModal: React.Dispatch<React.SetStateAction<string>>,
 }
 
-const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCompleted, setItemId  } : Props ) =>  {
+const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCompleted, setItemId, setModal  } : Props ) =>  {
     
     const {action, completed, _id} = item
 
@@ -81,7 +82,8 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCom
         </section>
         <section className='w-1/3 flex items-center justify-around'>
             <button className='bg-blue-500 rounded-xl w-1/2 h-5/6 ml-2 mr-1' onClick={() =>{handleEdit(_id)}}>edit</button>
-            <button className='bg-red-500 rounded-xl w-1/2 h-5/6 ml-1' onClick={() =>{handleDelete(_id)}}>delete</button>
+            {/* <button className='bg-red-500 rounded-xl w-1/2 h-5/6 ml-1' onClick={() =>{handleDelete(_id)}}>delete</button> */}
+            <button className='bg-red-500 rounded-xl w-1/2 h-5/6 ml-1' onClick={() =>{setModal('delete')}}>delete</button>
         </section>
         
     </section> 
