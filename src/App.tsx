@@ -45,7 +45,7 @@ function App() {
             console.log(json);
           })
     }))
-};
+  };
 
   useEffect(() => {
       fetchList();
@@ -97,7 +97,7 @@ function App() {
             : null
             }
             {list.length > 0 
-              ? <button className='bg-green-500  rounded-xl w-1/2 ml-2 mr-1' onClick={ () => setIsModal(true) }>add an item</button>
+              ? <button className='bg-green-500  rounded-xl w-1/2 ml-2 mr-1 mb-2' onClick={ () => setIsModal(true) }>add an item</button>
               : null
             }
           </section>

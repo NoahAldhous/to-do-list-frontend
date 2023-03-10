@@ -44,14 +44,15 @@ export default function NewItemModal({setIsModal} : {setIsModal:React.Dispatch<R
     }
 
     return <>
-        <section className= 'left-0 top-0 fixed w-full h-full flex flex-col justify-center items-center'>
-            <section className= 'z-50 relative flex flex-col justify-center items-center w-1/2 h-1/4 bg-slate-400'>
+        <section className= 'left-0 top-0 fixed w-screen h-screen flex flex-col justify-center items-center'>
+            <section className= 'z-50 relative flex flex-col justify-around items-center w-2/3 sm:w-1/3 h-1/3 bg-slate-400'>
+                <h3 className='text-2xl mt-4' >Add an Item</h3>
                 {newItemAdded
                 ? <p>item added!</p>
                 : <p> </p>
                 }
-                <input id='input-box' type='text' onFocus={()=>{setNewItemAdded(false)}} onChange = {updateItemText}></input>
-                <button onClick = {handleClick}>add</button>   
+                <input className='w-1/2 rounded-xl pl-2' id='input-box' type='text' maxLength={25} onFocus={()=>{setNewItemAdded(false)}} onChange = {updateItemText}></input>
+                <button className='bg-green-500 rounded-xl w-1/6 mt-2 mb-4' onClick = {handleClick}>add</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>
         <div onClick={handleClose} className= 'z-40 fixed left-0 top-0 bottom-0 right-0 w-full h-full bg-slate-900 opacity-50'></div>
