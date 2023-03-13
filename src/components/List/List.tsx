@@ -1,8 +1,7 @@
 import ListItem from './ListItem';
 
 type Props = {
-    setIsError: React.Dispatch<React.SetStateAction<boolean>>,
-    setEditModalText: React.Dispatch<React.SetStateAction<string>>,
+    setItemText: React.Dispatch<React.SetStateAction<string>>,
     setItemCompleted: React.Dispatch<React.SetStateAction<boolean>>,
     setItemId: React.Dispatch<React.SetStateAction<string>>,
     list: { _id: string, action: string, completed: boolean }[]|[],
@@ -10,12 +9,12 @@ type Props = {
     setModal: React.Dispatch<React.SetStateAction<string>>,
 }
 
-export default function List({ setIsError, setEditModalText, setItemCompleted, setItemId, list, setList, setModal }: Props){
+export default function List({setItemText, setItemCompleted, setItemId, list, setList, setModal }: Props){
 
     return<section className = ' overflow-y-scroll h-4/6 w-full pl-5 pr-5 min-w-fit flex flex-col justify-start items-center'>
             {list.map( item  => 
                 {
-                return <ListItem key = {item._id} item = {item} setList = {setList} setEditModalText= {setEditModalText} setItemCompleted = {setItemCompleted} setItemId = {setItemId} setModal = {setModal}/>
+                return <ListItem key = {item._id} item = {item} setList = {setList} setItemText= {setItemText} setItemCompleted = {setItemCompleted} setItemId = {setItemId} setModal = {setModal}/>
                 }
             )}
         </section>

@@ -5,25 +5,27 @@ import AddItemModal from './AddItemModal';
 type Props = {
     modal:string,
     setModal:React.Dispatch<React.SetStateAction<string>>,
-    editModalText: string,
+    itemText: string,
     itemCompleted: boolean,
     itemId: string,
     list: { _id: string, action: string, completed: boolean }[]|[],
     setList: React.Dispatch<React.SetStateAction<{ _id: string, action: string, completed: boolean }[]|[]>>,
 }
 
-export default function Modal({modal, setModal, editModalText, itemCompleted, itemId, list, setList} : Props){
-    //TODO:complete switch statement to render each modal type based on state
+export default function Modal({modal, setModal, itemText, itemCompleted, itemId, list, setList} : Props){
     switch(modal){
         case 'delete': 
             return <DeleteItemModal 
                 setModal = {setModal}
                 itemId={itemId}
+                list = {list}
+                setList = {setList}
+                itemText = {itemText}
                 />;
         case 'edit':
             return <EditItemModal 
                 setModal={setModal} 
-                editModalText ={editModalText} 
+                itemText ={itemText} 
                 itemCompleted={itemCompleted} 
                 itemId={itemId}
                 list={list}

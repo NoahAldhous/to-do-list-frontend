@@ -8,7 +8,7 @@ function App() {
 
   const [isError, setIsError] = useState<boolean>(false)
   const [modal, setModal] = useState<string>('none')
-  const [editModalText, setEditModalText] = useState<string>('')
+  const [itemText, setItemText] = useState<string>('')
   const [itemCompleted, setItemCompleted] = useState<boolean>(false)
   const [itemId, setItemId] = useState<string>('')
   const [list, setList] = useState<{_id: string, action: string, completed:boolean}[]|[]>([]);
@@ -60,9 +60,8 @@ function App() {
         : <section className="bg-slate-600 w-1/3 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-3xl shadow-2xl">
             <h1 className="flex justify-center text-4xl text-slate-800 w-full font-bold bg-slate-300"> To-Do-List</h1>
             {list.length > 0 
-              ? <List 
-                  setIsError = {setIsError} 
-                  setEditModalText ={setEditModalText} 
+              ? <List
+                  setItemText ={setItemText} 
                   setItemCompleted = {setItemCompleted} 
                   setItemId = {setItemId}
                   list = {list}
@@ -79,7 +78,7 @@ function App() {
             <Modal 
               modal={modal} 
               setModal={setModal}
-              editModalText ={editModalText} 
+              itemText ={itemText} 
               itemCompleted={itemCompleted} 
               itemId={itemId}
               list={list}

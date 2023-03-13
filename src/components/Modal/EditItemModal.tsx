@@ -2,16 +2,16 @@ import { useState } from 'react';
 
 type Props = {
     setModal: React.Dispatch<React.SetStateAction<string>>,
-    editModalText: string,
+    itemText: string,
     itemCompleted: boolean,
     itemId: string,
     list: { _id: string, action: string, completed: boolean }[]|[],
     setList: React.Dispatch<React.SetStateAction<{ _id: string, action: string, completed: boolean }[]|[]>>,
 }
 
-export default function EditItemModal({setModal, editModalText, itemCompleted, itemId, list, setList} : Props){
+export default function EditItemModal({setModal, itemText, itemCompleted, itemId, list, setList} : Props){
 
-    const [editItemText, setEditItemText] = useState<string>(editModalText)
+    const [editItemText, setEditItemText] = useState<string>(itemText)
 
     const [newItemUpdated, setNewItemUpdated] = useState<boolean>(false)
     

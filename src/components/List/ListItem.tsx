@@ -3,13 +3,13 @@ import React, { ChangeEventHandler, useState} from "react";
 type Props = {
     item: { _id: string, action: string; completed: boolean; },
     setList: React.Dispatch<React.SetStateAction<{_id: string, action: string, completed:boolean}[]|[]>>,
-    setEditModalText: React.Dispatch<React.SetStateAction<string>>,
+    setItemText: React.Dispatch<React.SetStateAction<string>>,
     setItemCompleted: React.Dispatch<React.SetStateAction<boolean>>,
     setItemId: React.Dispatch<React.SetStateAction<string>>,
     setModal: React.Dispatch<React.SetStateAction<string>>,
 }
 
-const ListItem = ( { item, setList, setEditModalText, setItemCompleted, setItemId, setModal  } : Props ) =>  {
+const ListItem = ( { item, setList, setItemText, setItemCompleted, setItemId, setModal  } : Props ) =>  {
     
     const {action, completed, _id} = item
 
@@ -46,10 +46,8 @@ const ListItem = ( { item, setList, setEditModalText, setItemCompleted, setItemI
         } 
     }
 
-
-
     const handleEdit = (_id:string) => {
-        setEditModalText(action);
+        setItemText(action);
         setItemId(_id);
         setItemCompleted(completed)
         setModal('edit')
@@ -57,9 +55,10 @@ const ListItem = ( { item, setList, setEditModalText, setItemCompleted, setItemI
 
     const handleDelete = ( _id:string) => {
         //state update to avoid having to fetch after every deletion
-        setList(list => list.filter(item => item._id !== _id))
+        setItemText(action);
         setItemId(_id);
         setModal('delete');
+        // setList(list => list.filter(item => item._id !== _id))
     }
 
     return <section className = 'w-full flex justify-around mb-4'>
