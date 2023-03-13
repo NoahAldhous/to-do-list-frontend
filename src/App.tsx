@@ -57,7 +57,7 @@ function App() {
         ? <section>
             <p>OOPS! We can't connect to the server right now. Please try again in a few minutes.</p>
           </section>
-        : <section className="bg-slate-600 w-1/3 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-3xl shadow-2xl">
+        : <section className="bg-slate-600 w-full ml-2 mr-2 sm:w-1/3 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-3xl shadow-2xl">
             <h1 className="flex justify-center text-4xl text-slate-800 w-full font-bold bg-slate-300"> To-Do-List</h1>
             {list.length > 0 
               ? <List
