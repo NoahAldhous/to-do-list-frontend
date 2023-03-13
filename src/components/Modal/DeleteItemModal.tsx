@@ -23,7 +23,7 @@ export default function DeleteItemModal( {setModal, itemId, list, setList, itemT
                 method: 'DELETE'    
             });
             const response = await data.json();
-            if(response){
+            if(response.success){
                 setItemDeleted(true);
                 setList(list => list.filter(item => item._id !== itemId))
             }

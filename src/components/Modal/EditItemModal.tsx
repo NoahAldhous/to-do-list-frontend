@@ -37,21 +37,24 @@ export default function EditItemModal({setModal, itemText, itemCompleted, itemId
                     "Content-type": "application/json; charset=UTF-8"
                     }
             })
-            console.log(data);
             const response = await data.json()
-            if(response){
+            console.log(response);
+            if(response.success){
                 setNewItemUpdated(true);
+                updateLocalList();
             }
-            console.log(response.message)
         }catch(err){
             console.log(err)
         }
     }
 
-    const handleEdit = () => {
-        updateItemInDatabase();
+    const updateLocalList = () => {
         const newList = list.map(item=> item._id === itemId ? {_id:item._id, action:editItemText, completed:item.completed} : item);
         setList(newList)
+    }
+
+    const handleEdit = () => {
+        updateItemInDatabase();
     }
 
     return <>

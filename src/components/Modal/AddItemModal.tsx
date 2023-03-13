@@ -35,7 +35,7 @@ export default function AddItemModal({ setModal, list, setList } : Props){
             })
             console.log(data);
             const response = await data.json()
-            if(response){
+            if(response.success){
                 setNewItemAdded(true);
                 (document.getElementById('input-box') as HTMLInputElement).value = '';
                 setList([...list, {_id: response.itemId, action:newItemText, completed:false}])
