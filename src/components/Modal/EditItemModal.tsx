@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 type Props = {
-    setIsEditModal: React.Dispatch<React.SetStateAction<boolean>>,
+    setModal: React.Dispatch<React.SetStateAction<string>>,
     editModalText: string,
     itemCompleted: boolean,
     itemId: string,
@@ -9,7 +9,7 @@ type Props = {
     setList: React.Dispatch<React.SetStateAction<{ _id: string, action: string, completed: boolean }[]|[]>>,
 }
 
-export default function EditItemModal({setIsEditModal, editModalText, itemCompleted, itemId, list, setList} : Props){
+export default function EditItemModal({setModal, editModalText, itemCompleted, itemId, list, setList} : Props){
 
     const [editItemText, setEditItemText] = useState<string>(editModalText)
 
@@ -22,7 +22,7 @@ export default function EditItemModal({setIsEditModal, editModalText, itemComple
     }
 
     const handleClose = () => {
-        setIsEditModal(false)
+        setModal('none')
     }
    
     const updateItemInDatabase = async() => {

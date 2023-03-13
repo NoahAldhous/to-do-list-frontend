@@ -3,14 +3,13 @@ import React, { ChangeEventHandler, useState} from "react";
 type Props = {
     item: { _id: string, action: string; completed: boolean; },
     setList: React.Dispatch<React.SetStateAction<{_id: string, action: string, completed:boolean}[]|[]>>,
-    setIsEditModal: React.Dispatch<React.SetStateAction<boolean>>,
     setEditModalText: React.Dispatch<React.SetStateAction<string>>,
     setItemCompleted: React.Dispatch<React.SetStateAction<boolean>>,
     setItemId: React.Dispatch<React.SetStateAction<string>>,
     setModal: React.Dispatch<React.SetStateAction<string>>,
 }
 
-const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCompleted, setItemId, setModal  } : Props ) =>  {
+const ListItem = ( { item, setList, setEditModalText, setItemCompleted, setItemId, setModal  } : Props ) =>  {
     
     const {action, completed, _id} = item
 
@@ -47,31 +46,20 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCom
         } 
     }
 
-    const deleteFromDatabase = async (itemId:string) => {
-        try{
-            const url = `https://naldhous-to-do-list.onrender.com/${itemId}`;
-            const data = await fetch(url, {
-                method: 'DELETE'    
-            });
-            const response = await data.json();
-            console.log(response);
-        }   
-        catch(err){
-            console.log(err)
-        }
-    }
+
 
     const handleEdit = (_id:string) => {
         setEditModalText(action);
         setItemId(_id);
         setItemCompleted(completed)
-        setIsEditModal(true);
+        setModal('edit')
     }
 
     const handleDelete = ( _id:string) => {
         //state update to avoid having to fetch after every deletion
         setList(list => list.filter(item => item._id !== _id))
-        deleteFromDatabase(_id)
+        setItemId(_id);
+        setModal('delete');
     }
 
     return <section className = 'w-full flex justify-around mb-4'>
@@ -82,8 +70,7 @@ const ListItem = ( { item, setList, setIsEditModal, setEditModalText, setItemCom
         </section>
         <section className='w-1/3 flex items-center justify-around'>
             <button className='bg-blue-500 rounded-xl w-1/2 h-5/6 ml-2 mr-1' onClick={() =>{handleEdit(_id)}}>edit</button>
-            {/* <button className='bg-red-500 rounded-xl w-1/2 h-5/6 ml-1' onClick={() =>{handleDelete(_id)}}>delete</button> */}
-            <button className='bg-red-500 rounded-xl w-1/2 h-5/6 ml-1' onClick={() =>{setModal('delete')}}>delete</button>
+            <button className='bg-red-500 rounded-xl w-1/2 h-5/6 ml-1' onClick={() =>{handleDelete(_id)}}>delete</button>
         </section>
         
     </section> 

@@ -1,9 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import './App.css';
-import EditItemModal from './components/EditItemModal/EditItemModal';
 import List from './components/List/List'
-import NewItemModal from './components/NewItemModal/NewItemModal';
 import Modal from './components/Modal/Modal'
 
 function App() {
@@ -11,8 +9,6 @@ function App() {
   const [isError, setIsError] = useState<boolean>(false)
   //TODO: refactor so all modals are rendered depending on this state-
   const [modal, setModal] = useState<string>('none')
-  const [isModal, setIsModal] = useState<boolean>(false)
-  const [isEditModal, setIsEditModal] = useState<boolean>(false)
   const [editModalText, setEditModalText] = useState<string>('')
   const [itemCompleted, setItemCompleted] = useState<boolean>(false)
   const [itemId, setItemId] = useState<string>('')
@@ -53,8 +49,7 @@ function App() {
   useEffect(() => {
       fetchList();
       console.log('fetchlist called')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[isModal, isEditModal])
+  },[modal])
 
   return (
     <div className="bg-slate-100 w-screen h-screen flex items-center justify-center">
@@ -67,10 +62,7 @@ function App() {
             <h1 className="flex justify-center text-4xl text-slate-800 w-full font-bold bg-slate-300"> To-Do-List</h1>
             {list.length > 0 
               ? <List 
-                  isModal={isModal} 
                   setIsError = {setIsError} 
-                  isEditModal={isEditModal} 
-                  setIsEditModal={setIsEditModal} 
                   setEditModalText ={setEditModalText} 
                   setItemCompleted = {setItemCompleted} 
                   setItemId = {setItemId}
@@ -85,7 +77,7 @@ function App() {
                 </section>
                 </section>
             }  
-            {isModal
+            {/* {isModal
             ? <NewItemModal setIsModal = {setIsModal}/>
             : null
             }
@@ -99,10 +91,18 @@ function App() {
                 setList={setList}
                 />
             : null
-            }
-            <Modal modal={modal} setModal={setModal}/>
+            } */}
+            <Modal 
+              modal={modal} 
+              setModal={setModal}
+              editModalText ={editModalText} 
+              itemCompleted={itemCompleted} 
+              itemId={itemId}
+              list={list}
+              setList={setList}
+            />
             {list.length > 0 
-              ? <button className='bg-green-500  rounded-xl w-1/2 ml-2 mr-1 mb-2' onClick={ () => setIsModal(true) }>add an item</button>
+              ? <button className='bg-green-500  rounded-xl w-1/2 ml-2 mr-1 mb-2' onClick={ () => setModal('add') }>add an item</button>
               : null
             }
           </section>

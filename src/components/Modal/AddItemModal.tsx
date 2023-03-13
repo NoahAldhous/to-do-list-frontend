@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function NewItemModal({setIsModal} : {setIsModal:React.Dispatch<React.SetStateAction<boolean>>}){
+export default function AddItemModal({setModal} : {setModal:React.Dispatch<React.SetStateAction<string>>}){
 
     const [newItemText, setNewItemText] = useState<string>('')
 
@@ -12,7 +12,7 @@ export default function NewItemModal({setIsModal} : {setIsModal:React.Dispatch<R
     }
 
     const handleClose = () => {
-        setIsModal(false)
+        setModal('none')
     }
    
     const addItemToDataBase = async() => {

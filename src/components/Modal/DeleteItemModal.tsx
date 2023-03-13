@@ -1,17 +1,28 @@
 
 type Props = {
     setModal:React.Dispatch<React.SetStateAction<string>>,
+    itemId: string,
 }
 
-export default function DeleteItemModal( {setModal}: Props ){
+export default function DeleteItemModal( {setModal, itemId}: Props ){
 
     function handleClose(){
         setModal('none')
         //TODO: ensure fetch is called again on close
     }
 
-    function handleDelete(){
-       //TODO: write handle delete function
+    const deleteFromDatabase = async () => {
+        try{
+            const url = `https://naldhous-to-do-list.onrender.com/${itemId}`;
+            const data = await fetch(url, {
+                method: 'DELETE'    
+            });
+            const response = await data.json();
+            console.log(response);
+        }   
+        catch(err){
+            console.log(err)
+        }
     }
 
     return <>
@@ -22,7 +33,7 @@ export default function DeleteItemModal( {setModal}: Props ){
                 ? <p className='h-1/6'>item deleted!</p>
                 : <p className='h-1/6'> </p>
                 } */}
-                <button className='bg-blue-500 rounded-xl w-1/6 mt-2 mb-4' onClick = {handleDelete}>delete</button>   
+                <button className='bg-blue-500 rounded-xl w-1/6 mt-2 mb-4' onClick = {deleteFromDatabase}>delete</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>
             <div onClick={handleClose} className= 'z-40 fixed left-0 top-0 bottom-0 right-0 w-full h-full bg-slate-900 opacity-50'></div>
