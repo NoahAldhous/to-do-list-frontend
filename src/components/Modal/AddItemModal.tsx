@@ -1,6 +1,12 @@
 import { useState } from 'react';
 
-export default function AddItemModal({setModal} : {setModal:React.Dispatch<React.SetStateAction<string>>}){
+type Props = {
+    setModal: React.Dispatch<React.SetStateAction<string>>,
+    list: { _id: string, action: string, completed: boolean }[]|[],
+    setList: React.Dispatch<React.SetStateAction<{ _id: string, action: string, completed: boolean }[]|[]>>,
+}
+
+export default function AddItemModal({ setModal, list, setList } : Props){
 
     const [newItemText, setNewItemText] = useState<string>('')
 
@@ -32,6 +38,7 @@ export default function AddItemModal({setModal} : {setModal:React.Dispatch<React
             if(response){
                 setNewItemAdded(true);
                 (document.getElementById('input-box') as HTMLInputElement).value = '';
+                setList([...list, {_id: response.itemId, action:newItemText, completed:false}])
             }
             console.log(response.message)
         }catch(err){

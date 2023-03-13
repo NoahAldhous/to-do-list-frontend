@@ -34,6 +34,8 @@ export default function Modal({modal, setModal, itemText, itemCompleted, itemId,
         case 'add':
             return <AddItemModal 
                 setModal = {setModal}
+                list = {list}
+                setList = {setList}
             />;
         case 'none':
             return null;
