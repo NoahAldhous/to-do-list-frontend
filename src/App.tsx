@@ -7,7 +7,6 @@ import Modal from './components/Modal/Modal'
 function App() {
 
   const [isError, setIsError] = useState<boolean>(false)
-  //TODO: refactor so all modals are rendered depending on this state-
   const [modal, setModal] = useState<string>('none')
   const [editModalText, setEditModalText] = useState<string>('')
   const [itemCompleted, setItemCompleted] = useState<boolean>(false)
@@ -77,21 +76,6 @@ function App() {
                 </section>
                 </section>
             }  
-            {/* {isModal
-            ? <NewItemModal setIsModal = {setIsModal}/>
-            : null
-            }
-            {isEditModal
-            ? <EditItemModal 
-                setIsEditModal={setIsEditModal} 
-                editModalText ={editModalText} 
-                itemCompleted={itemCompleted} 
-                itemId={itemId}
-                list={list}
-                setList={setList}
-                />
-            : null
-            } */}
             <Modal 
               modal={modal} 
               setModal={setModal}
