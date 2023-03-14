@@ -14,14 +14,12 @@ type Props = {
 
 export default function EditItemModal({setModal, itemText, itemCompleted, itemId, list, setList} : Props){
 
-    const [editItemText, setEditItemText] = useState<string>(itemText)
+    const [inputFieldText, setInputFieldText] = useState<string>(itemText)
 
     const [statusMessage, setStatusMessage] = useState<string>('')
     
     const updateItemText = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('change detected')
-        setEditItemText(e.target.value); 
-        console.log(editItemText)
+        setInputFieldText(e.target.value); 
     }
 
     const handleClose = () => {
@@ -34,7 +32,7 @@ export default function EditItemModal({setModal, itemText, itemCompleted, itemId
             const data = await fetch(url, {
                 method: 'PUT',         
                 body: JSON.stringify({
-                    action: editItemText, 
+                    action: inputFieldText, 
                     completed: itemCompleted}),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
@@ -52,15 +50,22 @@ export default function EditItemModal({setModal, itemText, itemCompleted, itemId
     }
 
     const updateLocalList = () => {
-        const newList = list.map(item=> item._id === itemId ? {_id:item._id, action:editItemText, completed:item.completed} : item);
+        const newList = list.map(item=> item._id === itemId ? {_id:item._id, action:inputFieldText, completed:item.completed} : item);
         setList(newList)
     }
 
+    const rejectUser = (message:string) => {
+        setStatusMessage(message);
+        setInputFieldText(itemText)
+    }
+
     const handleEdit = () => {
-        if(!editItemText.trim()){
-            setStatusMessage('type something first!');
-        }else if(filter.isProfane(editItemText)) {
-            setStatusMessage('sorry, no bad words allowed.')
+        if(!inputFieldText.trim()){
+            rejectUser('type something first!');
+        }else if(filter.isProfane(inputFieldText)) {
+            rejectUser('sorry, no bad words allowed.');
+        }else if(inputFieldText === itemText){
+            rejectUser('no changes have been made');
         }else{
             updateItemInDatabase();
         }
@@ -71,7 +76,7 @@ export default function EditItemModal({setModal, itemText, itemCompleted, itemId
             <section className= 'z-50 relative flex flex-col justify-around items-center w-2/3 sm:w-1/3 h-1/3 bg-slate-400'>
                 <h3 className='text-2xl mt-4' >Edit Item</h3>
                 <p className='h-1/6'>{statusMessage}</p>
-                <input className='w-5/6 sm:w-1/2 rounded-xl pl-2' id='input-box' type='text' maxLength={25} value={editItemText} onFocus={()=>{setStatusMessage('')}} onChange = {updateItemText}></input>
+                <input className='w-5/6 sm:w-1/2 rounded-xl pl-2' id='input-box' type='text' maxLength={25} value={inputFieldText} onFocus={()=>{setStatusMessage('')}} onChange = {updateItemText}></input>
                 <button className='bg-blue-500 rounded-xl w-1/6 mt-2 mb-4' onClick = {handleEdit}>save</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>

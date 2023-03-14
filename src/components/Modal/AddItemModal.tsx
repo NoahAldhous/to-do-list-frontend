@@ -51,12 +51,16 @@ export default function AddItemModal({ setModal, list, setList } : Props){
         }
     }
 
+    const rejectUser = (message:string) => {
+        setStatusMessage(message);
+        resetInputField();
+    }
+
     const handleClick = () => {
         if(!newItemText.trim()){
-            setStatusMessage('type something first!');
-            resetInputField();
+            rejectUser('type something first!');
         }else if(filter.isProfane(newItemText)){
-            setStatusMessage('sorry, no bad words allowed.')
+            rejectUser('sorry, no bad words allowed.')
         }else{
             addItemToDataBase();
         }
