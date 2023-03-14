@@ -13,7 +13,7 @@ export default function EditItemModal({setModal, itemText, itemCompleted, itemId
 
     const [editItemText, setEditItemText] = useState<string>(itemText)
 
-    const [newItemUpdated, setNewItemUpdated] = useState<boolean>(false)
+    const [statusMessage, setStatusMessage] = useState<string>('')
     
     const updateItemText = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log('change detected')
@@ -40,7 +40,7 @@ export default function EditItemModal({setModal, itemText, itemCompleted, itemId
             const response = await data.json()
             console.log(response);
             if(response.success){
-                setNewItemUpdated(true);
+                setStatusMessage('item updated!');
                 updateLocalList();
             }
         }catch(err){
@@ -54,18 +54,19 @@ export default function EditItemModal({setModal, itemText, itemCompleted, itemId
     }
 
     const handleEdit = () => {
-        updateItemInDatabase();
+        if(!editItemText.trim()){
+            setStatusMessage('type something first!');
+        }else {
+            updateItemInDatabase();
+        }
     }
 
     return <>
         <section className= 'left-0 top-0 fixed w-screen h-screen flex flex-col justify-center items-center'>
             <section className= 'z-50 relative flex flex-col justify-around items-center w-2/3 sm:w-1/3 h-1/3 bg-slate-400'>
                 <h3 className='text-2xl mt-4' >Edit Item</h3>
-                {newItemUpdated
-                ? <p className='h-1/6'>item updated!</p>
-                : <p className='h-1/6'> </p>
-                }
-                <input className='w-5/6 sm:w-1/2 rounded-xl pl-2' id='input-box' type='text' maxLength={25} value={editItemText} onFocus={()=>{setNewItemUpdated(false)}} onChange = {updateItemText}></input>
+                <p className='h-1/6'>{statusMessage}</p>
+                <input className='w-5/6 sm:w-1/2 rounded-xl pl-2' id='input-box' type='text' maxLength={25} value={editItemText} onFocus={()=>{setStatusMessage('')}} onChange = {updateItemText}></input>
                 <button className='bg-blue-500 rounded-xl w-1/6 mt-2 mb-4' onClick = {handleEdit}>save</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>
