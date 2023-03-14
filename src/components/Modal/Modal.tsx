@@ -13,32 +13,33 @@ type Props = {
 }
 
 export default function Modal({modal, setModal, itemText, itemCompleted, itemId, list, setList} : Props){
-    switch(modal){
-        case 'delete': 
-            return <DeleteItemModal 
+
+    return <>
+            {{'delete': 
+            <DeleteItemModal 
                 setModal = {setModal}
                 itemId={itemId}
                 list = {list}
                 setList = {setList}
                 itemText = {itemText}
-                />;
-        case 'edit':
-            return <EditItemModal 
+                />,
+        'edit':
+             <EditItemModal 
                 setModal={setModal} 
                 itemText ={itemText} 
                 itemCompleted={itemCompleted} 
                 itemId={itemId}
                 list={list}
                 setList={setList}
-            />
-        case 'add':
-            return <AddItemModal 
+            />,
+        'add':
+            <AddItemModal 
                 setModal = {setModal}
                 list = {list}
                 setList = {setList}
-            />;
-        case 'none':
-            return null;
-        default: return null;
+            />,
+        'none': null,
+    }[modal]
     }
+    </>
 };
