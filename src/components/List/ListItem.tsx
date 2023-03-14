@@ -67,12 +67,10 @@ const ListItem = ( { item, setList, setItemText, setItemCompleted, setItemId, se
             <input  className='accent-orange-500' type='checkbox' onChange={handleChange} checked= {checked ? true : false}/>
         </section>
         <section className='w-1/3 flex items-center justify-around'>
-            <button className='bg-blue-500 rounded-xl w-1/2 h-5/6 ml-2 mr-1' onClick={() =>{handleEdit(_id)}}>edit</button>
-            <button className='bg-red-500 rounded-xl w-1/2 h-5/6 ml-1' onClick={() =>{handleDelete(_id)}}>delete</button>
-        </section>
-        
+            <button className='bg-blue-600 hover:bg-blue-400 rounded-xl w-1/2 h-5/6 ml-2 mr-1' onClick={() =>{handleEdit(_id)}}>edit</button>
+            <button className='bg-red-600 hover:bg-red-400 rounded-xl w-1/2 h-5/6 ml-1' onClick={() =>{handleDelete(_id)}}>delete</button>
+        </section> 
     </section> 
 }
 
 export default ListItem
-

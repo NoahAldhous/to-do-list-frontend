@@ -85,7 +85,7 @@ function App() {
               setList={setList}
             />
             {list.length > 0 
-              ? <button className='bg-green-500  rounded-xl w-1/2 ml-2 mr-1 mb-2' onClick={ () => setModal('add') }>add an item</button>
+              ? <button className='bg-green-600 hover:bg-green-400 rounded-xl w-1/2 ml-2 mr-1 mb-2' onClick={ () => setModal('add') }>add an item</button>
               : null
             }
           </section>
