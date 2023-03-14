@@ -51,14 +51,14 @@ function App() {
   },[modal])
 
   return (
-    <div className="bg-slate-100 w-screen h-screen flex items-center justify-center">
+    <div className="bg-slate-200 w-screen h-screen flex items-center justify-center">
       {
         isError 
         ? <section>
             <p>OOPS! We can't connect to the server right now. Please try again in a few minutes.</p>
           </section>
-        : <section className="bg-slate-600 w-full ml-2 mr-2 sm:w-5/12 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-3xl shadow-2xl">
-            <h1 className="flex justify-center text-4xl text-slate-800 w-full font-bold bg-slate-300"> To-Do-List</h1>
+        : <section className="bg-slate-400 w-full ml-2 mr-2 sm:w-5/12 min-w-fit h-5/6 flex items-center justify-around flex-col rounded-xl shadow-2xl">
+            <h1 className="flex justify-center text-4xl text-slate-800 w-full font-bold">My To-Do-List</h1>
             {list.length > 0 
               ? <List
                   setItemText ={setItemText} 
@@ -68,8 +68,8 @@ function App() {
                   setList = {setList}
                   setModal = {setModal}
                 />
-              : <section className='left-0 top-0 fixed w-screen h-screen flex flex-col justify-center items-center'>
-                <section className= 'z-50 relative flex flex-col justify-around items-center w-full sm:w-1/3 h-1/3 bg-slate-400'>
+              : <section className='rounded-xl left-0 top-0 fixed w-screen h-screen flex flex-col justify-center items-center'>
+                <section className= 'rounded-xl z-50 relative flex flex-col justify-around items-center w-11/12 sm:w-1/3 h-1/3 bg-slate-400'>
                   <h3 className='text-3xl'>Loading...</h3>
                   <p className='text-xl p-2'>{loadingMessage}</p>
                 </section>

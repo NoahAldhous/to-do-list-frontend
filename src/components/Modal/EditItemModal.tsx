@@ -73,7 +73,7 @@ export default function EditItemModal({setModal, itemText, itemCompleted, itemId
 
     return <>
         <section className= 'left-0 top-0 fixed w-screen h-screen flex flex-col justify-center items-center'>
-            <section className= 'z-50 relative flex flex-col justify-around items-center w-2/3 sm:w-1/3 h-1/3 bg-slate-400'>
+            <section className= 'z-50 relative flex flex-col justify-around rounded-xl items-center w-2/3 sm:w-1/3 h-1/3 bg-slate-400'>
                 <h3 className='text-2xl mt-4' >Edit Item</h3>
                 <p className='h-1/6'>{statusMessage}</p>
                 <input className='w-5/6 sm:w-1/2 rounded-xl pl-2' id='input-box' type='text' maxLength={25} value={inputFieldText} onFocus={()=>{setStatusMessage('')}} onChange = {updateItemText}></input>
