@@ -10,7 +10,7 @@ export default function AddItemModal({ setModal, list, setList } : Props){
 
     const [newItemText, setNewItemText] = useState<string>('')
 
-    const [newItemAdded, setNewItemAdded] = useState<boolean>(false)
+    const [statusMessage, setStatusMessage] = useState<string>('')
     
     const updateItemText = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewItemText(e.target.value); 
@@ -19,6 +19,10 @@ export default function AddItemModal({ setModal, list, setList } : Props){
 
     const handleClose = () => {
         setModal('none')
+    }
+
+    const resetInputField = () => {
+        (document.getElementById('input-box') as HTMLInputElement).value = '';
     }
    
     const addItemToDataBase = async() => {
@@ -33,32 +37,32 @@ export default function AddItemModal({ setModal, list, setList } : Props){
                     "Content-type": "application/json; charset=UTF-8"
                     }
             })
-            console.log(data);
             const response = await data.json()
             if(response.success){
-                setNewItemAdded(true);
-                (document.getElementById('input-box') as HTMLInputElement).value = '';
+                setStatusMessage(`'${newItemText}' added to list!`);
+                resetInputField();
                 setList([...list, {_id: response.itemId, action:newItemText, completed:false}])
             }
-            console.log(response.message)
         }catch(err){
             console.log(err)
         }
     }
 
     const handleClick = () => {
-        addItemToDataBase();
+        if(!newItemText.trim()){
+            setStatusMessage('type something first!');
+            resetInputField();
+        }else{
+            addItemToDataBase();
+        }
     }
 
     return <>
         <section className= 'left-0 top-0 fixed w-screen h-screen flex flex-col justify-center items-center'>
             <section className= 'z-50 relative flex flex-col justify-around items-center w-2/3 sm:w-1/3 h-1/3 bg-slate-400'>
                 <h3 className='text-2xl mt-4' >Add an Item</h3>
-                {newItemAdded
-                ? <p>item added!</p>
-                : <p> </p>
-                }
-                <input className='w-5/6 sm:w-1/2 rounded-xl pl-2' id='input-box' type='text' maxLength={25} onFocus={()=>{setNewItemAdded(false)}} onChange = {updateItemText}></input>
+                <p>{statusMessage}</p>
+                <input className='w-5/6 sm:w-1/2 rounded-xl pl-2' id='input-box' type='text' maxLength={25} onFocus={()=>{setStatusMessage('')}} onChange = {updateItemText}></input>
                 <button className='bg-green-500 rounded-xl w-1/6 mt-2 mb-4' onClick = {handleClick}>add</button>   
                 <button className='absolute right-0 top-0 mt-1 mr-3' onClick={handleClose}>close X</button>
             </section>
