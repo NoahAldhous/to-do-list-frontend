@@ -58,11 +58,10 @@ const ListItem = ( { item, setList, setItemText, setItemCompleted, setItemId, se
         setItemText(action);
         setItemId(_id);
         setModal('delete');
-        // setList(list => list.filter(item => item._id !== _id))
     }
 
     return <section className = 'w-full flex justify-around mb-4'>
-        <section key = {_id} className='w-2/3 bg-slate-800 flex justify-end rounded-xl pl-4 pr-4 pb-1 pt-1'> 
+        <section key = {_id} className='w-2/3 bg-slate-800 hover:bg-slate-700 flex justify-end rounded-xl pl-4 pr-4 pb-1 pt-1'> 
             <p className='cursor-pointer truncate text-s md:text-l sm:text-xl text-slate-200' onClick={() => handleEdit(_id)}>{ action }</p>
             <div className='w-2'></div>
             <input  className='accent-orange-500' type='checkbox' onChange={handleChange} checked= {checked ? true : false}/>
