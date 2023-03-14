@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import  Filter from 'bad-words';
+
+const filter = new Filter()
 
 type Props = {
     setModal: React.Dispatch<React.SetStateAction<string>>,
@@ -52,6 +55,8 @@ export default function AddItemModal({ setModal, list, setList } : Props){
         if(!newItemText.trim()){
             setStatusMessage('type something first!');
             resetInputField();
+        }else if(filter.isProfane(newItemText)){
+            setStatusMessage('sorry, no bad words allowed.')
         }else{
             addItemToDataBase();
         }
